@@ -31,4 +31,5 @@ npm-debug.log*
 /www
 /ios
 /android
+/.gradle
 /electron
