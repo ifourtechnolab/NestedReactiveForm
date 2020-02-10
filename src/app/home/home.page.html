@@ -1,0 +1,204 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>
+      Reactive Form
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <div class="doctorRegister">
+    <form [formGroup]="myForm">
+      <div formGroupName="Person">
+        <div class="ionRow">
+          <ion-input placeholder="First name" type="text" formControlName="FirstName">
+          </ion-input>
+        </div>
+        <p ion-text
+          *ngIf="myForm.controls.Person.controls['FirstName'].hasError('required') && myForm.controls.Person.controls['FirstName'].touched">
+          <ion-text color="danger">
+            First name is empty.
+          </ion-text>
+        </p>
+
+        <div class="ionRow">
+          <ion-input placeholder="Last name" type="text" formControlName="LastName">
+          </ion-input>
+        </div>
+
+        <div class="ionRow">
+          <ion-datetime placeholder="Date of birth" display-format="MMM DD, YYYY" picker-format="MMM DD, YYYY"
+            formControlName="DateOfBirth">
+          </ion-datetime>
+        </div>
+        <p ion-text
+          *ngIf="myForm.controls.Person.controls['DateOfBirth'].hasError('required') && myForm.controls.Person.controls['DateOfBirth'].touched">
+          <ion-text color="danger">
+            Date of birth is empty.
+          </ion-text>
+        </p>
+
+        <ion-list-header>Select gender</ion-list-header>
+        <ion-list>
+          <ion-radio-group formControlName="Gender">
+            <ion-grid>
+              <ion-row>
+                <ion-col class="statusCol" size="6" *ngFor="let obj of arrGender">
+                  <ion-radio mode="md" value="{{obj.genderId}}" (ionSelect)="genderSelect($event)">
+                  </ion-radio>
+                  <ion-label color="medium" class="text-1x">{{obj.name}}</ion-label>
+                </ion-col>
+              </ion-row>
+            </ion-grid>
+          </ion-radio-group>
+        </ion-list>
+        <p ion-text
+          *ngIf="myForm.controls.Person.controls['Gender'].hasError('required') && myForm.controls.Person.controls['Gender'].touched">
+          <ion-text color="danger">
+            Please select gender.
+          </ion-text>
+        </p>
+      </div>
+
+      <div formGroupName="Office">
+        <div class="ionRow">
+          <ion-input placeholder="Designation" type="text" formControlName="Designation">
+          </ion-input>
+        </div>
+        <p ion-text
+          *ngIf="myForm.controls.Office.controls['Designation'].hasError('required') && myForm.controls.Office.controls['Designation'].touched">
+          <ion-text color="danger">
+            Designation is empty.
+          </ion-text>
+        </p>
+
+        <div class="ionRow">
+          <ion-input placeholder="Department" type="text" formControlName="Department">
+          </ion-input>
+        </div>
+        <p ion-text
+          *ngIf="myForm.controls.Office.controls['Department'].hasError('required') && myForm.controls.Office.controls['Department'].touched">
+          <ion-text color="danger">
+            Department is empty.
+          </ion-text>
+        </p>
+
+        <div class="ionRow">
+          <ion-datetime placeholder="Date of join" display-format="MMM DD, YYYY" picker-format="MMM DD, YYYY"
+            formControlName="DateOfJoin">
+          </ion-datetime>
+        </div>
+        <p ion-text
+          *ngIf="myForm.controls.Office.controls['DateOfJoin'].hasError('required') && myForm.controls.Office.controls['DateOfJoin'].touched">
+          <ion-text color="danger">
+            Date of join is empty.
+          </ion-text>
+        </p>
+      </div>
+
+      <div formGroupName="ContactDetail">
+        <div class="ionRow">
+          <ion-input placeholder="Mobile" type="tel" formControlName="Mobile">
+          </ion-input>
+        </div>
+        <p ion-text
+          *ngIf="myForm.controls.ContactDetail.controls['Mobile'].hasError('required') && myForm.controls.ContactDetail.controls['Mobile'].touched">
+          <ion-text color="danger">
+            Mobile number is empty.
+          </ion-text>
+        </p>
+        <p ion-text
+          *ngIf="(myForm.controls.ContactDetail.controls['Mobile'].hasError('minlength') || myForm.controls.ContactDetail.controls['Mobile'].hasError('maxlength')) && myForm.controls.ContactDetail.controls['Mobile'].touched">
+          <ion-text color="danger">
+            Mobile number should be 8-10 characters long.
+          </ion-text>
+        </p>
+
+        <div class="ionRow">
+          <ion-input placeholder="Email" type="text" formControlName="Email">
+          </ion-input>
+        </div>
+        <p ion-text
+          *ngIf="myForm.controls.ContactDetail.controls['Email'].hasError('email') && myForm.controls.ContactDetail.controls['Email'].touched">
+          <ion-text color="danger">
+            Email is invalid.
+          </ion-text>
+        </p>
+      </div>
+
+      <div formGroupName="Address">
+        <div class="ionRow">
+          <ion-input placeholder="House number" type="text" formControlName="HouseNumber">
+          </ion-input>
+        </div>
+        <p ion-text
+          *ngIf="myForm.controls.Address.controls['HouseNumber'].hasError('required') && myForm.controls.Address.controls['HouseNumber'].touched">
+          <ion-text color="danger">
+            House number is empty.
+          </ion-text>
+        </p>
+
+        <div class="ionRow">
+          <ion-input placeholder="Street" type="text" formControlName="Street">
+          </ion-input>
+        </div>
+        <p ion-text
+          *ngIf="myForm.controls.Address.controls['Street'].hasError('required') && myForm.controls.Address.controls['Street'].touched">
+          <ion-text color="danger">
+            Street is empty.
+          </ion-text>
+        </p>
+
+        <div class="ionRow">
+          <ion-select interface="popover" placeholder="Select city" formControlName="City"
+            (ionChange)="selectCity($event)">
+            <ion-select-option *ngFor="let obj of arrCity" value="{{obj.Id}}">
+              {{obj.Name}}
+            </ion-select-option>
+          </ion-select>
+        </div>
+        <p ion-text
+          *ngIf="myForm.controls.Address.controls['City'].hasError('required') && myForm.controls.Address.controls['City'].touched">
+          <ion-text color="danger">
+            City is empty.
+          </ion-text>
+        </p>
+
+        <div class="ionRow">
+          <ion-input placeholder="Postal code" type="text" formControlName="PostalCode">
+          </ion-input>
+        </div>
+        <p ion-text
+          *ngIf="myForm.controls.Address.controls['PostalCode'].hasError('required') && myForm.controls.Address.controls['PostalCode'].touched">
+          <ion-text color="danger">
+            Postal code is empty.
+          </ion-text>
+        </p>
+      </div>
+
+      <div class="ionRow">
+        <ion-textarea placeholder="Notes" type="text" formControlName="Note">
+        </ion-textarea>
+      </div>
+      <p ion-text *ngIf="myForm.controls['Note'].hasError('required') && myForm.controls['Note'].touched">
+        <ion-text color="danger">
+          Note is empty.
+        </ion-text>
+      </p>
+    </form>
+  </div>
+</ion-content>
+
+<ion-footer>
+  <ion-toolbar>
+    <ion-row>
+      <ion-col>
+        <ion-button size="large" expand="block" (click)="save(myForm)" tappable>
+          <ion-text color="light">
+            Save
+          </ion-text>
+        </ion-button>
+      </ion-col>
+    </ion-row>
+  </ion-toolbar>
+</ion-footer>

@@ -1,0 +1,8 @@
+{
+  "appId": "com.ifour.form",
+  "appName": "Nested Form",
+  "bundledWebRuntime": false,
+  "npmClient": "npm",
+  "webDir": "www",
+  "cordova": {}
+}

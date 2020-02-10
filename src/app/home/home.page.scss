@@ -1,0 +1,11 @@
+:host {
+    ion-list-header {
+        padding-left: 0;
+    }
+
+    ion-button {
+        padding: 5px 10px;
+        --border-radius: 25px !important;
+        --background: linear-gradient(45deg, var(--ion-color-primary) 0%, var(--ion-color-secondary) 100%);
+    }
+}
